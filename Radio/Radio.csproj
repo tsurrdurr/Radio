@@ -70,7 +70,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Object\ViewModel.cs" />
+    <Compile Include="Models\ViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PlaylistsViewModel.cs" />
     <Compile Include="Views\UserControls\PlaylistView.xaml.cs">
@@ -95,8 +95,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Object\Playlist.cs" />
-    <Compile Include="Object\RelayCommand.cs" />
+    <Compile Include="Models\Playlist.cs" />
+    <Compile Include="Models\RelayCommand.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
