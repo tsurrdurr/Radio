@@ -14,14 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 
-namespace Radio
+namespace Radio.Views.UserControls
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Interaction logic for PlaylistView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PlaylistView : UserControl
     {
-        public MainWindow()
+        public PlaylistView()
         {
             InitializeComponent();
         }

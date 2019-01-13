@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using Radio.Object;
 using Radio.Workers;
 
@@ -51,15 +52,16 @@ namespace Radio.ViewModels
         {
             Playlists = Worker.LoadPlaylists();
             SelectedPlaylist = Playlists.FirstOrDefault();
-            var outer = Task.Factory.StartNew(() =>      // внешняя задача
+            Action calledMethod = UpdateFromUIThread;
+            Application.Current.Dispatcher.BeginInvoke(calledMethod);
+        }
+
+        private void UpdateFromUIThread()
+        {
+            for (int i = 0; i < Playlists.Count; i++)
             {
-                for (int i = 0; i < Playlists.Count; i++)
-                {
-                    Playlists[i] = Worker.LoadImages(Playlists[i]);
-                    Thread.Sleep(5);
-                }
-               
-            });
+                Playlists[i] = Worker.LoadImages(Playlists[i]);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
