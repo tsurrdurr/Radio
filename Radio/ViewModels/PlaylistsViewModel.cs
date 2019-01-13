@@ -16,9 +16,10 @@ namespace Radio.ViewModels
     {
         public PlaylistsViewModel()
         {
-            Playlists = Worker.LoadPlaylists();
+            var downloader = new PlaylistDownloader(); ;
+            Playlists = downloader.LoadPlaylists();
             SelectedPlaylist = Playlists.FirstOrDefault();
-            Action calledMethod = UpdateFromUIThread;
+            Action calledMethod = LoadIconsFromUIThread;
             Application.Current.Dispatcher.BeginInvoke(calledMethod);
         }
 
@@ -36,11 +37,12 @@ namespace Radio.ViewModels
             }
         }
 
-        private void UpdateFromUIThread()
+        private void LoadIconsFromUIThread()
         {
+            var downloader = new PlaylistDownloader();
             for (int i = 0; i < Playlists.Count; i++)
             {
-                Playlists[i] = Worker.LoadImages(Playlists[i]);
+                Playlists[i] = downloader.LoadIcon(Playlists[i]);
             }
         }
     }
