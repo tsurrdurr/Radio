@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Radio.Object
 {
-    class Playlist
+    public class Playlist
     {
         private string name;
         private string url;

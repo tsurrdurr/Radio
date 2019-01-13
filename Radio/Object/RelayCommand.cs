@@ -9,29 +9,43 @@ namespace Radio.Object
 {
     class RelayCommand : ICommand
     {
-        private Action<object> execute;
-        private Func<object, bool> canExecute;
-
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
-
-        public RelayCommand(Action<object> execute, Func<object, bool> canExecute = null)
-        {
-            this.execute = execute;
-            this.canExecute = canExecute;
-        }
-
-        public bool CanExecute(object parameter)
-        {
-            return this.canExecute == null || this.canExecute(parameter);
-        }
-
-        public void Execute(object parameter)
-        {
-            this.execute(parameter);
-        }
+         private Action<object> _action;
+         private bool _canExecute;
+         public event EventHandler CanExecuteChanged;
+         
+         public RelayCommand(Action execute, bool canExecute = true)
+         {
+             this._action = x => execute();
+             this._canExecute = canExecute;
+         }
+         
+         bool ICommand.CanExecute(object parameter)
+         {
+             return CanExecute;
+         }
+         
+         public bool CanExecute
+         {
+             get { return _canExecute; }
+             set
+             {
+                 if (_canExecute != value)
+                 {
+                     _canExecute = value;
+                     OnCanExecuteChanged();
+                 }
+             }
+         }
+         
+         public void Execute(object parameter)
+         {
+             this._action(parameter);
+         }
+         
+         
+         protected virtual void OnCanExecuteChanged()
+         {
+             CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+         }
     }
 }
