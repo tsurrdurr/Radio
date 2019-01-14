@@ -4,55 +4,28 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Radio"
-        xmlns:gif="clr-namespace:WpfAnimatedGif;assembly=WpfAnimatedGif"
         xmlns:vm="clr-namespace:Radio.ViewModels"
+        xmlns:user="clr-namespace:Radio.Views.UserControls"
+        xmlns:gif="clr-namespace:WpfAnimatedGif;assembly=WpfAnimatedGif"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Radio" Height="450" Width="800">
     <Window.DataContext>
         <vm:MainViewModel />
     </Window.DataContext>
     <Window.Background>
-        <ImageBrush ImageSource="{Binding SelectedPlaylist.BackgroundImagePath}"/>
+        <ImageBrush ImageSource="{Binding PlaylistsVM.SelectedPlaylist.BackgroundImagePath}"/>
     </Window.Background>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="181*" />
-            <ColumnDefinition Width="611*" />
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="7*" />
         </Grid.ColumnDefinitions>
-        <ListBox  Grid.Column="0" ItemsSource="{Binding Playlists}"
-                 SelectedItem="{Binding SelectedPlaylist}">
-            <ListBox.ItemTemplate >
-                <DataTemplate>
-                    <Grid Column="2" Width="271">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="55*" />
-                            <ColumnDefinition Width="221*" />
-                        </Grid.ColumnDefinitions>
-                        <Image gif:ImageBehavior.AnimatedSource="{Binding ImagePath}" gif:ImageBehavior.AutoStart="True" Grid.Column="0"  Source="{Binding ImagePath , UpdateSourceTrigger=PropertyChanged}"/>
-                        <StackPanel Grid.Column="1" Margin="5">
-                            <TextBlock FontSize="18" Text="{Binding Path=Name}" />
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
-        <StackPanel Grid.Column="0" Orientation="Horizontal">
-            <Grid Column="2" Row="2" Width="286">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="157" />
-                </Grid.ColumnDefinitions>
-            </Grid>
-        </StackPanel>
-        <StackPanel DataContext="{Binding SelectedPlaylist}" Grid.Column="1" Grid.Row="0" >
-            <TextBlock Text="Имя" />
-            <TextBlock Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}" />
-            <TextBlock Text="Ссылка" />
-            <TextBox Text="{Binding Url, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="0,0,10,0" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
-            <TextBlock Text="Ссылка на интро" />
-            <TextBox Text="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="0,0,10,0" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
-            <TextBlock Text="Ссылка бекграунд" />
-            <TextBox Text="{Binding BackgroundImagePath, UpdateSourceTrigger=PropertyChanged}" IsReadOnly="True" Margin="0,0,10,0" VerticalScrollBarVisibility="Auto" TextWrapping="Wrap" />
-        </StackPanel>
+        <Grid Grid.Column="0">
+            <user:PlaylistView DataContext="{Binding PlaylistsVM}"/>
+        </Grid>
+        <Grid Grid.Column="1">
+            <user:PlayerView DataContext="{Binding PlaylistsVM}"/>
+        </Grid>
     </Grid>
 </Window>

@@ -10,18 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MahApps.Metro.Controls;
 
-namespace Radio
+namespace Radio.Views.UserControls
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для PlayerView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PlayerView : UserControl
     {
-        public MainWindow()
+        public PlayerView()
         {
             InitializeComponent();
         }

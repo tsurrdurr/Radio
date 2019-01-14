@@ -11,6 +11,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Radio.Object;
 using Radio.ViewModels;
+using Un4seen.Bass;
 
 namespace Radio.Workers
 {
@@ -93,6 +94,16 @@ namespace Radio.Workers
         {
             WebClient webClient = new WebClient();
             webClient.DownloadFile(url,path.FullName);
+        }
+
+        public static void PlayAudio(string url)
+        {
+            Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero);
+            int _stream = Bass.BASS_StreamCreateURL(url, 0, BASSFlag.BASS_DEFAULT, null, IntPtr.Zero);
+            if (_stream != 0)
+            {
+                Bass.BASS_ChannelPlay(_stream, false);
+            }
         }
        
     }
