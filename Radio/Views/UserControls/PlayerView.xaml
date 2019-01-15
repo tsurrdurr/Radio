@@ -1,0 +1,48 @@
+﻿<UserControl x:Class="Radio.Views.UserControls.PlayerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:gif="clr-namespace:WpfAnimatedGif;assembly=WpfAnimatedGif"
+             xmlns:local="clr-namespace:Radio.Views.UserControls"
+             xmlns:object="clr-namespace:Radio.Models"
+             xmlns:viewModels="clr-namespace:Radio.ViewModels"
+             mc:Ignorable="d"
+             d:DesignHeight="400"
+             d:DesignWidth="600">
+    <UserControl.DataContext>
+        <viewModels:PlaylistsViewModel/>
+    </UserControl.DataContext>
+    <Grid Grid.Column="1">
+        <Grid.Width>
+            <Binding Path="ActualWidth" 
+                     RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollContentPresenter}}" />
+        </Grid.Width>
+        <Grid.Height>
+            <Binding Path="ActualHeight" 
+                     RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollContentPresenter}}" />
+        </Grid.Height>
+        <Grid Margin="5,5,5,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="173*"/>
+                <RowDefinition Height="27*"/>
+            </Grid.RowDefinitions>
+            <Image Margin="50,50,50,50" Grid.Row="0" gif:ImageBehavior.AnimatedSource="{Binding SelectedPlaylist.PlayedGif}" 
+                   gif:ImageBehavior.AutoStart="True"  
+                   Opacity="100"
+                   Source="{Binding SelectedPlaylist.PlayedGif, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Grid.Row="0"  Margin="50,50,50,50" Command="{Binding PlayCommand}" Opacity="0">
+            </Button>
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="Назад" Command="{Binding PreviousCommand}"></Button>
+                <Button Grid.Column="2" Content="Вперёд" Command="{Binding NextCommand}"></Button>
+                <Slider  Grid.Column="1"  Maximum="100" Value="{Binding Volume, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

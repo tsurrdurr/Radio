@@ -9,7 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Radio.Object;
+using Radio.Models;
 using Radio.ViewModels;
 
 namespace Radio.Workers
@@ -74,6 +74,7 @@ namespace Radio.Workers
             };
             playlist.GifList = GetUrlArrayFromRequest(playlist.Url + "gifs").ToList();
             playlist.MusicList = GetUrlArrayFromRequest(playlist.Url + "music").ToList();
+            playlist = GenerateNewPlayed(playlist);
             return playlist;
         }
 
@@ -99,6 +100,16 @@ namespace Radio.Workers
             WebClient webClient = new WebClient();
             webClient.DownloadFile(url, savePath.FullName);
         }
-       
+
+        public static Playlist GenerateNewPlayed(Playlist playlist)
+        {
+            Random rnd = new Random();
+            int gifind = rnd.Next(playlist.GifList.Count);
+            int trackind = rnd.Next(playlist.MusicList.Count);
+            playlist.PlayedGif = siteUrl + playlist.GifList[gifind];
+            playlist.PlayedTrack = siteUrl + playlist.MusicList[trackind];
+            return playlist;
+        }
+
     }
 }

@@ -5,19 +5,15 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Radio.ViewModels;
+using Radio.Workers;
 
-namespace Radio.Object
+namespace Radio.Models
 {
     public class Playlist
     {
-        private string name;
-        private string url;
-        private string imagePath;
-        private string backgroundImagePath;
-        private List<string> musicList;
-        private List<string> gifList;
-       
 
+        private string name;
         public string Name
         {
             get { return name; }
@@ -27,6 +23,8 @@ namespace Radio.Object
                 OnPropertyChanged("Name");
             }
         }
+
+        private string url;
         public string Url
         {
             get { return url; }
@@ -37,6 +35,7 @@ namespace Radio.Object
             }
         }
 
+        private string imagePath;
         public string ImagePath
         {
             get { return imagePath; }
@@ -46,6 +45,8 @@ namespace Radio.Object
                 OnPropertyChanged("ImagePath");
             }
         }
+
+        private string backgroundImagePath;
         public string BackgroundImagePath
         {
             get { return backgroundImagePath; }
@@ -55,6 +56,8 @@ namespace Radio.Object
                 OnPropertyChanged("BackgroundImagePath");
             }
         }
+
+        private List<string> musicList;
         public List<string> MusicList
         {
             get { return musicList; }
@@ -64,6 +67,8 @@ namespace Radio.Object
                 OnPropertyChanged("MusicList");
             }
         }
+
+        private List<string> gifList;
         public List<string> GifList
         {
             get { return gifList; }
@@ -73,6 +78,40 @@ namespace Radio.Object
                 OnPropertyChanged("GifList");
             }
         }
+
+        private string playedTrack;
+        public string PlayedTrack
+        {
+            get { return playedTrack; }
+            set
+            {
+                playedTrack = value;
+                OnPropertyChanged("PlayedTrack");
+            }
+        }
+        private List<string> previousTracks = new List<string>();
+        public List<string> PreviousTracks
+        {
+            get { return previousTracks; }
+            set
+            {
+                previousTracks = value;
+                OnPropertyChanged("PreviousTracks");
+            }
+        }
+
+        private string playedGif;
+        public string PlayedGif
+        {
+            get
+            { return playedGif;}
+            set
+            {
+                playedGif = value;
+                OnPropertyChanged("PlayedGif");
+            }
+        }
+       
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")

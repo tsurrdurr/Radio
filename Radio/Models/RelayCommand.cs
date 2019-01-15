@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Radio.Object
+namespace Radio.Models
 {
-    class RelayCommand : ICommand
+    public class RelayCommand : ICommand
     {
          private Action<object> _action;
          private bool _canExecute;

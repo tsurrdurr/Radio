@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
-using Radio.Object;
+using Radio.Models;
 using Radio.Workers;
 
 namespace Radio.ViewModels
@@ -26,7 +26,8 @@ namespace Radio.ViewModels
 
         private RelayCommand _addCommand;
         public RelayCommand AddCommand => _addCommand ?? (_addCommand = new RelayCommand(AddPlaylist));
-
+       
+       
         private void AddPlaylist()
         {
             throw new NotImplementedException();

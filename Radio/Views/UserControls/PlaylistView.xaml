@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:gif="clr-namespace:WpfAnimatedGif;assembly=WpfAnimatedGif"
              xmlns:local="clr-namespace:Radio.Views.UserControls"
-             xmlns:object="clr-namespace:Radio.Object"
+             xmlns:object="clr-namespace:Radio.Models"
              xmlns:viewModels="clr-namespace:Radio.ViewModels"
              mc:Ignorable="d"
              d:DesignHeight="400"
@@ -18,8 +18,8 @@
             <Binding Path="ActualWidth" 
                      RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollContentPresenter}}" />
         </Grid.Width>
-        <ListBox ItemsSource="{Binding Playlists}"
-                 SelectedItem="{Binding SelectedPlaylist}"
+        <ListBox Name="ListBoxPlaylists" ItemsSource="{Binding Playlists}"
+                 SelectedItem="{Binding SelectedPlaylist,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
             <ListBox.ItemTemplate>
                 <DataTemplate>
